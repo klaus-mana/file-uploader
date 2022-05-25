@@ -41,10 +41,9 @@ const server = http.createServer(async (req, res) => {
 
     // /api/:id/:file : GET
     // TODO: Figure out Content-Disposition headers & initiating file download
-    // TODO: Optimize regex to accept appropriate/correct filenames
     // TODO: Test file download capability
     // TODO: If direct file download too difficult/taxing, figure out a way to display a direct download link from S3 to user, and how to pull that information using AWS SDK
-    else if (req.url.match(/\/api\/([a-zA-Z0-9]+)\/([a-zA-Z0-9]+)/) && req.method === 'GET') {
+    else if (req.url.match(/\/api\/([a-zA-Z0-9]+)\/([a-zA-Z0-9]+)\.?([a-zA-Z0-9]+)/) && req.method === 'GET') {
         try {
             let userId = req.url.split('/')[2];
             let fileName = req.url.split('/')[3];
@@ -117,8 +116,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     // /api/:id/:file : DELETE
-    // TODO: Optimize regex to recognize appropriate/correct filename
-    else if (req.url.match(/\/api\/([a-zA-Z0-9]+)\/([a-zA-Z0-9]+)/) && req.method === 'DELETE') {
+    else if (req.url.match(/\/api\/([a-zA-Z0-9]+)\/([a-zA-Z0-9]+)\.?([a-zA-Z0-9]+)/) && req.method === 'DELETE') {
         try {
             let userId = req.url.split('/')[2];
             let fileName = req.url.split('/')[3];
